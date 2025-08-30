@@ -7,5 +7,6 @@ npx cap copy android
 npx cap sync android
 npx cap open android
 
-Todo en una una linea:
-ionic build && npx cap copy android && npx cap open android
+ionic build
+npx cap sync android
+npx cap open android
