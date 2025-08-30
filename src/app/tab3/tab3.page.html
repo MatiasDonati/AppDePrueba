@@ -1,17 +1,30 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>
-      Tab 3
-    </ion-title>
+    <ion-title>Podés cambiar el color!!!</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Tab 3</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<!-- Fondo dinámico: solo se aplica si hay un color -->
+<ion-content [fullscreen]="true"
+             [style.--background]="mi_color ? 'var(--ion-color-' + mi_color + ')' : null"
+             [style.--ion-text-color]="mi_color ? 'var(--ion-color-' + mi_color + '-contrast)' : null">
 
-  <app-explore-container name="Tab 3 page"></app-explore-container>
+  <ion-card>
+    <ion-card-header>Cambiar el color de fondo</ion-card-header>
+    <ion-card-content>
+      <ion-label>Seleccionar Color:</ion-label>
+
+      <ion-select [(ngModel)]="mi_color" interface="popover" placeholder="Elegí un color">
+        <ion-select-option value="primary">Primario</ion-select-option>
+        <ion-select-option value="secondary">Secundario</ion-select-option>
+        <ion-select-option value="tertiary">Terciario</ion-select-option>
+        <ion-select-option value="success">Éxito</ion-select-option>
+        <ion-select-option value="warning">Advertencia</ion-select-option>
+        <ion-select-option value="danger">Peligro</ion-select-option>
+        <ion-select-option value="light">Claro</ion-select-option>
+        <ion-select-option value="medium">Medio</ion-select-option>
+        <ion-select-option value="dark">Oscuro</ion-select-option>
+      </ion-select>
+    </ion-card-content>
+  </ion-card>
 </ion-content>

@@ -7,7 +7,5 @@ import { Component } from '@angular/core';
   standalone: false,
 })
 export class Tab3Page {
-
-  constructor() {}
-
+  public mi_color: string = '';  // 👉 arranca vacío
 }

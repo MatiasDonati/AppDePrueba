@@ -18,3 +18,20 @@
   </ion-tab-bar>
 
 </ion-tabs>
+
+<!-- Acciones arriba a la derecha: botón arriba, chip debajo -->
+<div class="top-actions vertical">
+  <ion-fab-button color="danger" (click)="confirmLogout()" aria-label="Cerrar sesión">
+    <ion-icon name="log-out-outline"></ion-icon>
+  </ion-fab-button>
+
+  <ion-chip class="user-chip" *ngIf="userEmail">
+    <ion-avatar class="avatar">
+      <span>{{ userEmail[0] | uppercase }}</span>
+    </ion-avatar>
+    <ion-label class="email">{{ userEmail }}</ion-label>
+  </ion-chip>
+</div>
+
+
+

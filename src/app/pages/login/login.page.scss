@@ -1,0 +1,31 @@
+ion-content {
+  --background: #121212;
+}
+ion-item {
+  --background: #1e1e1e;
+  --color: #fff;
+  border-radius: 10px;
+  margin: 8px 0;
+}
+ion-content { --background: #121212; }
+
+/* Caja del input (modo dark) */
+.field {
+  display: block;
+  margin: 12px 0;
+
+  /* estilos del IonInput */
+  --background: #1e1e1e;
+  --color: #fff;
+  --placeholder-color: #aaa;
+  --label-color: #bbb;
+  --border-radius: 12px;
+  --padding-start: 12px;
+  --padding-end: 12px;
+  --highlight-color-focused: #4c8dff;
+
+  /* si querés borde */
+  --border-width: 1px;
+  --border-style: solid;
+  --border-color: rgba(255,255,255,.2);
+}

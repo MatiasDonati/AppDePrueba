@@ -1,17 +1,62 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-title>
-      Tab 1
+      Bienvenido!!!
     </ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Tab 1</ion-title>
-    </ion-toolbar>
-  </ion-header>
+  <ion-card id="NongModel">
+    <ion-card-header>Sin ngModel</ion-card-header>
+    <ion-item>
+      <ion-label>Nombre: </ion-label>
+      <ion-input type="text" #nom></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label>Apellido: </ion-label>
+      <ion-input type="text" #ape></ion-input>
+    </ion-item>
 
-  <app-explore-container name="Tab 1 page"></app-explore-container>
+    <ion-button color="primary" ion-button block (click)="MostrarDatos(nom.value, ape.value)">Mostrar Datos</ion-button>
+
+    <!-- BLOQUE DE DATOS -->
+    <ion-card *ngIf="mostrar">
+
+      <ion-card-header>Tus Datos</ion-card-header>
+
+      <ion-card-content>
+
+        <h3>Nombre:</h3>
+        <p>{{nombre}}</p>
+
+        <h3>Apellido:</h3>
+        <p>{{apellido}}</p>
+
+      </ion-card-content>
+
+    </ion-card>
+
+  </ion-card>
+
+  <br>
+  <br>
+
+  <!--   __Con ngMODEL__ -->
+  <ion-card id="CongModel">
+
+    <ion-card-header>Con ngModel</ion-card-header>
+    <ion-card-content>
+      <ion-item>
+        <ion-label>Dirección: </ion-label>
+        <ion-input type="text" [(ngModel)]="direccion" name="dir"></ion-input>
+      </ion-item>
+      
+      <br> 
+      
+      Tu Dirección es: {{direccion}}
+
+    </ion-card-content>
+  </ion-card>
+
 </ion-content>
