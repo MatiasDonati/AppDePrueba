@@ -32,7 +32,7 @@ export class LoginPage implements OnDestroy {
   async ionViewWillEnter() {
     // Si ya hay sesión, redirige a Tabs
     const session = await this.auth.getSession();
-    if (session) this.router.navigateByUrl('/', { replaceUrl: true });
+    if (session) this.router.navigateByUrl('/tabs', { replaceUrl: true });
   }
 
   async login() {
@@ -51,7 +51,7 @@ export class LoginPage implements OnDestroy {
       const { email, password } = this.form.value as any;
       await this.auth.signIn(email, password);
       await loading.dismiss();
-      this.router.navigateByUrl('/', { replaceUrl: true });
+      this.router.navigateByUrl('/tabs', { replaceUrl: true });
     } catch (e: any) {
       await loading.dismiss();
 
