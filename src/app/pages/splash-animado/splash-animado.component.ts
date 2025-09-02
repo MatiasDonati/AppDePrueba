@@ -13,7 +13,7 @@ import { CommonModule } from '@angular/common';
 export class SplashAnimadoComponent implements OnInit {
   constructor(private router: Router) {}
   ngOnInit() {
-    setTimeout(() => this.router.navigateByUrl('/login', { replaceUrl: true }), 5000);
+    setTimeout(() => this.router.navigateByUrl('/login', { replaceUrl: true }), 4000);
   }
 
 

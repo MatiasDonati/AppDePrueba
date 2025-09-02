@@ -23,10 +23,113 @@ ion-item {
   --border-color: rgba(255,255,255,.2);
 }
 
-/* (Opcional) header “glass” para ver el logo detrás y mejorar contraste */
 ion-header[translucent] {
   --background: rgba(0,0,0,0.2);
   --ion-toolbar-background: rgba(0,0,0,0.2);
   --border-width: 0;
 }
 ion-title { color: #fff; }
+
+/* Nota de error */
+.note {
+  display: block;
+  margin-top: 4px;
+}
+
+
+/* ===== Acceso rápido (3 logos circulares centrados) ===== */
+
+.quick-login {
+  margin-top: 18px;
+  display: flex;
+  justify-content: center; /* centra el contenedor completo */
+}
+
+.quick-list {
+  /* 3 columnas fijas y centradas */
+  --quick-size: 84px;                 /* cambiá este tamaño si querés más grande/chico */
+  display: grid;
+  grid-template-columns: repeat(3, var(--quick-size));
+  gap: 16px;
+  justify-content: center;            /* centra la grilla */
+  align-items: center;                /* centra verticalmente el contenido en cada celda */
+}
+
+.quick-btn {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  text-align: center;
+  color: #fff;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+
+  margin-top: 5px;
+  padding-top: 0;                  /* evita que el botón agregue espacios raros */
+  -webkit-tap-highlight-color: transparent;
+
+  &:hover .quick-avatar,
+  &:focus-visible .quick-avatar {
+    outline: 2px solid rgba(255,255,255,.35);
+    outline-offset: 2px;
+    transform: translateY(-1px);
+  }
+
+  &:active .quick-avatar {
+    transform: translateY(0);         /* feedback al presionar */
+    filter: brightness(0.95);
+  }
+}
+
+.quick-avatar {
+  width: var(--quick-size);
+  height: var(--quick-size);
+  border-radius: 50%;                 /* círculo sí o sí */
+  overflow: hidden;
+
+  border: 2px solid rgba(255,255,255,.2);
+  box-shadow: 0 6px 20px rgba(0,0,0,.35);
+  background: rgba(255,255,255,.04);
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  transition: transform .12s ease, box-shadow .12s ease;
+}
+
+.quick-avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;                  /* rellena y recorta si la imagen no es cuadrada */
+  border-radius: 50%;                 /* refuerza el círculo en el contenido */
+  display: block;
+}
+
+.quick-label {
+  font-size: 0.85rem;
+  color: #ddd;
+  line-height: 1;
+}
+
+/* (Opcional) Ajuste para pantallas muy chicas */
+@media (max-width: 360px) {
+  .quick-list {
+    --quick-size: 72px;
+    gap: 12px;
+  }
+}
+
+
+/* ya lo tenías */
+.quick-avatar {
+  transition: transform .14s ease, box-shadow .14s ease;
+}
+
+/* agrandar al tocar */
+.quick-btn:active .quick-avatar {
+  transform: scale(1.08);
+}

@@ -5,6 +5,7 @@
 </ion-header>
 
 <ion-content [fullscreen]="true" class="ion-padding bg-carpincho .bg-carpincho--smaller">
+  <!-- Submit solo ejecuta login(); el alta se maneja con onSignupClick() -->
   <form [formGroup]="form" (ngSubmit)="login()">
     <ion-input
       class="field"
@@ -21,14 +22,64 @@
       label-placement="floating"
       type="password"
       formControlName="password"
-      autocomplete="current-password">
+      [autocomplete]="isSignup ? 'new-password' : 'current-password'">
     </ion-input>
 
-    <ion-button class="ion-margin-top" expand="block" type="submit">
+    <!-- Solo aparece en modo crear cuenta -->
+    <ion-input
+      *ngIf="isSignup"
+      class="field"
+      label="Reingresá la contraseña"
+      label-placement="floating"
+      type="password"
+      formControlName="confirmPassword"
+      autocomplete="new-password">
+    </ion-input>
+
+    <!-- Nota de error por contraseñas distintas -->
+    <ion-note *ngIf="isSignup && form.hasError('passwordMismatch')" color="danger" class="note">
+      Las contraseñas no coinciden
+    </ion-note>
+
+    <!-- Botones principales -->
+    <ion-button class="ion-margin-top" expand="block" type="submit" *ngIf="!isSignup">
       INGRESAR
     </ion-button>
-    <ion-button fill="outline" expand="block" type="button" (click)="signup()">
-      CREAR CUENTA
+
+    <ion-button fill="outline" expand="block" type="button" (click)="onSignupClick()">
+      {{ isSignup ? 'CONFIRMAR CREACIÓN' : 'CREAR CUENTA' }}
+    </ion-button>
+
+    <ion-button fill="clear" expand="block" type="button" (click)="cancelSignup()" *ngIf="isSignup">
+      Cancelar
     </ion-button>
   </form>
+
+  <!-- Acceso rápido con animales (oculto en modo signup) -->
+  <div class="quick-login" *ngIf="!isSignup">
+    <!-- <div class="quick-title">Accesos rápidos</div> -->
+
+    <div class="quick-list">
+      <button type="button" class="quick-btn" (click)="quickLogin('yacare')" aria-label="Ingresar como Yacare">
+        <ion-avatar class="quick-avatar">
+          <img src="assets/Yacare.png" alt="Yacare" />
+        </ion-avatar>
+        <!-- <span class="quick-label">Yacare</span> -->
+      </button>
+
+      <button type="button" class="quick-btn" (click)="quickLogin('zorro')" aria-label="Ingresar como Zorro">
+        <ion-avatar class="quick-avatar">
+          <img src="assets/Zorro.png" alt="Zorro" />
+        </ion-avatar>
+        <!-- <span class="quick-label">Zorro</span> -->
+      </button>
+
+      <button type="button" class="quick-btn" (click)="quickLogin('ciervo')" aria-label="Ingresar como Ciervo">
+        <ion-avatar class="quick-avatar">
+          <img src="assets/Ciervo.png" alt="Ciervo" />
+        </ion-avatar>
+        <!-- <span class="quick-label">Ciervo</span> -->
+      </button>
+    </div>
+  </div>
 </ion-content>
