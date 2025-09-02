@@ -11,32 +11,42 @@
   align-items: center;
   text-align: center;
   color: #7C3AED;
+  overflow: hidden; /* evita scroll durante el zoom */
 }
 
-/* posiciones ancladas + offsets para imitar el splash estático */
-.top   { align-self: start;  margin-top: 10vh; }  /* ↓ baja el nombre */
+.top   { align-self: start;  margin-top: 10vh; }
 .center{ display:flex; align-items:center; justify-content:center; }
-.bottom{ align-self: end;    margin-bottom: 10vh; } /* ↑ sube la división */
+.bottom{ align-self: end;    margin-bottom: 10vh; }
 
-/* tamaños fluidos */
+/* LOGO sobre el viewport (no se recorta por el grid) */
 .logo{
   width: 56vw; max-width: 280px; min-width: 160px;
   height: auto;
   opacity: 0;
-  transform: scale(.7) rotate(0deg);
+  position: fixed;             /* 👈 clave: relativo al viewport */
+  left: 50%; top: 50%;
+  transform: translate(-50%,-50%) scale(.7) rotate(0deg);
+  transform-origin: center;
+  z-index: 10;
+  backface-visibility: hidden;
   will-change: transform;
-  /* 1) aparece  2) luego gira suave infinito */
+
+  /* 1) aparece  2) gira 1 vez  3) llena la pantalla */
   animation:
-    popIn .8s ease-out forwards,
-    spin 2.5s linear infinite 1s;
+    popIn    .8s  ease-out               forwards,
+    spinOnce 2s   linear     .9s         forwards,
+    zoomFill 1.6s cubic-bezier(.4,0,.2,1) 3s forwards; /* empieza al terminar el giro */
 }
 
+/* Desvanece textos/linea antes del zoom para que no queden por encima */
 .titulo{
   margin: 0 0 8px;
   font-size: clamp(22px, 6.2vw, 34px);
   font-weight: 600;
   opacity: 0;
-  animation: fadeIn .8s ease-out .30s forwards;
+  animation:
+    fadeIn  .8s ease-out .30s forwards,
+    fadeOut .25s linear  2.8s forwards;   /* 👈 se apaga antes del zoom */
 }
 
 .division{
@@ -45,7 +55,9 @@
   font-weight: 500;
   letter-spacing: .3px;
   opacity: 0;
-  animation: fadeIn .8s ease-out .55s forwards;
+  animation:
+    fadeIn  .8s ease-out .55s forwards,
+    fadeOut .25s linear  2.8s forwards;
 }
 
 .linea{
@@ -53,21 +65,26 @@
   margin: 6px auto 0;
   background: #7C3AED; border-radius: 3px;
   opacity: 0;
-  animation: grow .7s ease-out .8s forwards;
+  animation:
+    grow    .7s ease-out .8s forwards,
+    fadeOut .25s linear  2.8s forwards;
 }
 
-/* animaciones */
-@keyframes popIn { to { opacity:1; transform: scale(1) rotate(0deg); } }
-@keyframes fadeIn{ to { opacity:1; } }
-@keyframes grow  { from{ width:0; opacity:0; } to{ width:64%; opacity:1; } }
-
-/* giro continuo (mantiene scale(1) para no “pelear” con popIn) */
-@keyframes spin {
-  from { transform: scale(1) rotate(0deg); }
-  to   { transform: scale(1) rotate(360deg); }
+/* keyframes (con translate para mantener centrado siempre) */
+@keyframes popIn    { to { opacity:1; transform: translate(-50%,-50%) scale(1) rotate(0deg); } }
+@keyframes fadeIn   { to { opacity:1; } }
+@keyframes fadeOut  { to { opacity:0; } }
+@keyframes grow     { from{ width:0; opacity:0; } to{ width:64%; opacity:1; } }
+@keyframes spinOnce { from { transform: translate(-50%,-50%) scale(1) rotate(0); }
+                      to   { transform: translate(-50%,-50%) scale(1) rotate(360deg); } }
+/* llena la pantalla */
+@keyframes zoomFill {
+  from { transform: translate(-50%,-50%) scale(1) rotate(360deg); }
+  to   { transform: translate(-50%,-50%) scale(6) rotate(360deg); } /* ajustá 6 a gusto */
 }
 
-/* Accesibilidad: si el usuario prefiere menos movimiento, desactivar giro */
+/* Menos movimiento para accesibilidad */
 @media (prefers-reduced-motion: reduce){
   .logo { animation: popIn .8s ease-out forwards; }
+  .titulo, .division, .linea { animation: fadeIn .8s ease-out .3s forwards; }
 }

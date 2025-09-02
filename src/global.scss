@@ -35,3 +35,87 @@
 /* @import "@ionic/angular/css/palettes/dark.always.css"; */
 /* @import "@ionic/angular/css/palettes/dark.class.css"; */
 @import "@ionic/angular/css/palettes/dark.system.css";
+
+
+// ========================================================================//
+// ========================================================================//
+/* ===========================
+   Fondo global: Carpincho
+   Uso: <ion-content class="bg-carpincho">
+   Ajustes rápidos: agregá modifiers opcionales debajo
+   =========================== */
+.bg-carpincho {
+  --background: #121212;   /* base dark */
+  --logo-size: 140vmax;    /* tamaño del logo (120–180vmax según gusto) */
+  --bg-dim: 0.65;          /* oscurecido del radial (0 = nada, 1 = muy oscuro) */
+}
+
+.bg-carpincho::part(background) {
+  background:
+    radial-gradient(transparent 40%, rgba(0,0,0,var(--bg-dim)) 100%),
+    url('/assets/carpincho.png') center / var(--logo-size) no-repeat,
+    #121212;
+}
+
+/* Modificadores opcionales (por si querés variar por página) */
+.bg-carpincho--bigger  { --logo-size: 180vmax; }
+.bg-carpincho--smaller { --logo-size: 120vmax; }
+.bg-carpincho--lighter { --bg-dim: 0.35; }
+.bg-carpincho--darker  { --bg-dim: 0.8; }
+
+
+
+
+
+/* =========== Toast de logout centrado (GLOBAL) =========== */
+ion-toast.logout-toast {
+  --background: rgba(18,18,18,1);
+  --color: #fff;
+  --border-radius: 12px;
+  --box-shadow: 0 12px 48px rgba(0,0,0,.45);
+  text-align: center;
+}
+
+/* Caja */
+ion-toast.logout-toast::part(container) {
+  width: min(92vw, 300px);
+  padding: 14px 16px;
+  border-radius: 12px;
+  // border: 1px solid rgba(255,255,255,.08);
+  backdrop-filter: blur(6px) saturate(120%);
+}
+
+/* Mensaje */
+ion-toast.logout-toast::part(message) {
+  font-size: .95rem;
+  line-height: 1.35;
+  margin: 2px 0 10px;
+}
+
+/* Botones base */
+ion-toast.logout-toast::part(button) {
+  /* 👇 forzamos el color del texto del botón */
+  --button-color: #ffffff;
+  color: var(--button-color) !important;
+
+  font-weight: 700;
+  padding: 8px 12px;
+  border-radius: 10px;
+  background: rgba(255,255,255,.08);
+  margin-left: 8px;
+}
+
+/* CANCELAR (primer botón): outline claro y texto legible */
+ion-toast.logout-toast::part(button):first-of-type {
+  --button-color: #e6e6e6;
+  background: transparent !important;
+  border: 1px solid rgba(255,255,255,.28);
+  box-shadow: none;
+}
+
+/* SALIR (último botón): violeta sólido */
+ion-toast.logout-toast::part(button):last-of-type {
+  --button-color: #fff;
+  background: #7C3AED !important;
+  border: 1px solid #7C3AED;
+}

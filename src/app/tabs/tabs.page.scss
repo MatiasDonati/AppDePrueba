@@ -47,10 +47,61 @@
   font-weight: 700;
 }
 
+
 /* Modo oscuro */
 @media (prefers-color-scheme: dark) {
   .user-chip {
     --background: rgba(30, 30, 30, 0.7); /* translúcido */
     --color: #fff;
   }
+}
+
+
+/* Toast centrado estilo tarjeta */
+.logout-toast {
+  /* variables expuestas por ion-toast */
+  --background: rgba(18,18,18,.96);
+  --color: #fff;
+  --border-radius: 12px;          /* ⬅️ más “cuadrado”: probá 10px u 8px */
+  --box-shadow: 0 12px 48px rgba(0,0,0,.45);
+  --button-color: #fff;           /* color base de los botones */
+
+  text-align: center;
+}
+
+/* Caja del toast (dentro del shadow DOM) */
+.logout-toast::part(container) {
+  width: min(92vw, 340px);        /* ancho tipo alert */
+  padding: 14px 16px;
+  border-radius: 12px;
+  border: 1px solid rgba(255,255,255,.08);
+  backdrop-filter: blur(6px) saturate(120%);
+}
+
+/* Mensaje */
+.logout-toast::part(message) {
+  font-size: .95rem;
+  line-height: 1.35;
+  margin: 2px 0 10px;
+}
+
+/* Botones (estilo pastilla) */
+.logout-toast::part(button) {
+  font-weight: 600;
+  padding: 8px 12px;
+  border-radius: 10px;
+  background: rgba(255,255,255,.08);
+  margin-left: 8px;
+}
+
+/* primer botón = Cancelar (más sutil) */
+.logout-toast::part(button):first-of-type {
+  background: transparent;
+  color: #bfbfbf;
+}
+
+/* segundo botón = Salir (violeta) */
+.logout-toast::part(button):last-of-type {
+  background: #7C3AED;
+  color: #fff;
 }

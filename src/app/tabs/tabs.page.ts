@@ -1,6 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
-import { AlertController } from '@ionic/angular';
+import { ToastController } from '@ionic/angular';
 import { Subscription } from 'rxjs';
 import { AuthService } from '../core/auth.service';
 
@@ -17,11 +17,10 @@ export class TabsPage implements OnInit, OnDestroy {
   constructor(
     private auth: AuthService,
     private router: Router,
-    private alertCtrl: AlertController
+    private toastCtrl: ToastController,
   ) {}
 
   ngOnInit() {
-    // Suscribirse a los cambios de usuario para mostrar el email
     this.sub = this.auth.getUser().subscribe(user => {
       this.userEmail = user?.email ?? null;
     });
@@ -31,24 +30,23 @@ export class TabsPage implements OnInit, OnDestroy {
     this.sub?.unsubscribe();
   }
 
-  // Confirmación con popup antes de cerrar sesión
   async confirmLogout() {
-    const alert = await this.alertCtrl.create({
-      header: 'Cerrar sesión',
-      message: '¿Seguro que querés cerrar sesión?',
+    const toast = await this.toastCtrl.create({
+      message: '¿Cerrar sesión?',
+      position: 'middle',
+      duration: 0,
+      mode: 'md',              //  evita tarjeta blanca estilo iOS
+      cssClass: 'logout-toast',
       buttons: [
-        { text: 'Cancelar', role: 'cancel' },
-        {
-          text: 'Salir',
-          role: 'destructive',
-          handler: () => this.logout(),
-        },
+        { text: 'CANCELAR', role: 'cancel' },
+        { text: 'SALIR', role: 'destructive', handler: () => this.logout() },
       ],
     });
-    await alert.present();
+    await toast.present();
   }
 
-  // Logout real
+
+
   async logout() {
     await this.auth.signOut();
     this.router.navigateByUrl('/login', { replaceUrl: true });
