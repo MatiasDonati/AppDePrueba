@@ -1,0 +1,57 @@
+:host {
+  --carpi-size: 60vmax;      /* tamaño del logo */
+  --carpi-dim: 0.65;         /* oscurecido radial (0–1) */
+  --carpi-offset-y: 10vh;    /* ⬅️ corrimiento vertical (+ baja, - sube) */
+}
+
+/* Fondo base negro y texto según contraste */
+.has-carpincho {
+  --background: #000;
+  color: var(--text-contrast, #fff);
+}
+
+/* Capa del carpincho pintada con --carpi-color y enmascarada por el SVG */
+.carpi {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+
+  /* Viñeta que acompaña el corrimiento */
+  background:
+    radial-gradient(circle at 50% calc(50% + var(--carpi-offset-y)),
+                    transparent 40%, rgba(0,0,0,var(--carpi-dim)) 100%),
+    transparent;
+  background-color: var(--carpi-color, #7C3AED);
+
+  /* --- MÁSCARA (desglosada para poder posicionar) --- */
+  -webkit-mask-image: url('../../assets/carpincho_mask_binarized.svg');
+  -webkit-mask-repeat: no-repeat;
+  -webkit-mask-size: var(--carpi-size);
+  -webkit-mask-position: 50% calc(50% + var(--carpi-offset-y));
+
+  mask-image: url('../../assets/carpincho_mask_binarized.svg');
+  mask-repeat: no-repeat;
+  mask-size: var(--carpi-size);
+  mask-position: 50% calc(50% + var(--carpi-offset-y));
+
+  /* animaciones agradables al cambiar color/tamaño/posición */
+  transition:
+    background-color .25s ease,
+    -webkit-mask-position .35s ease,
+    mask-position .35s ease,
+    transform .35s ease,
+    opacity .25s ease;
+}
+
+/* (Opcional) micro-zoom/fade */
+:host-context(.animar) .carpi {
+  transform: scale(1.02);
+  opacity: .98;
+}
+
+/* Superficies oscuras legibles sobre el fondo */
+ion-card, ion-item {
+  --background: #1b1b1b;
+  color: #fff;
+}

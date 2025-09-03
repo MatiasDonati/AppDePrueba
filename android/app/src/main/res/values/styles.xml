@@ -15,8 +15,11 @@
         <item name="android:background">@null</item>
     </style>
 
-
     <style name="AppTheme.NoActionBarLaunch" parent="Theme.SplashScreen">
+        <!-- tu imagen -->
         <item name="android:background">@drawable/splash</item>
+        <!-- fallback negro debajo de la imagen -->
+        <item name="android:windowBackground">@android:color/black</item>
     </style>
+
 </resources>

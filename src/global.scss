@@ -1,3 +1,134 @@
+// /*
+//  * App Global CSS
+//  * ----------------------------------------------------------------------------
+//  * Put style rules here that you want to apply globally. These styles are for
+//  * the entire app and not just one component. Additionally, this file can be
+//  * used as an entry point to import other CSS/Sass files to be included in the
+//  * output CSS.
+//  * For more information on global stylesheets, visit the documentation:
+//  * https://ionicframework.com/docs/layout/global-stylesheets
+//  */
+
+// /* Core CSS required for Ionic components to work properly */
+// @import "@ionic/angular/css/core.css";
+
+// /* Basic CSS for apps built with Ionic */
+// @import "@ionic/angular/css/normalize.css";
+// @import "@ionic/angular/css/structure.css";
+// @import "@ionic/angular/css/typography.css";
+// @import "@ionic/angular/css/display.css";
+
+// /* Optional CSS utils that can be commented out */
+// @import "@ionic/angular/css/padding.css";
+// @import "@ionic/angular/css/float-elements.css";
+// @import "@ionic/angular/css/text-alignment.css";
+// @import "@ionic/angular/css/text-transformation.css";
+// @import "@ionic/angular/css/flex-utils.css";
+
+// /**
+//  * Ionic Dark Mode
+//  * -----------------------------------------------------
+//  * For more info, please see:
+//  * https://ionicframework.com/docs/theming/dark-mode
+//  */
+
+// /* @import "@ionic/angular/css/palettes/dark.always.css"; */
+// /* @import "@ionic/angular/css/palettes/dark.class.css"; */
+// @import "@ionic/angular/css/palettes/dark.system.css";
+
+
+// // ========================================================================//
+// // ========================================================================//
+// /* ===========================
+//    Fondo global: Carpincho
+//    Uso: <ion-content class="bg-carpincho">
+//    Ajustes rápidos: agregá modifiers opcionales debajo
+//    =========================== */
+// .bg-carpincho {
+//   --background: #121212;   /* base dark */
+//   --logo-size: 140vmax;    /* tamaño del logo (120–180vmax según gusto) */
+//   --bg-dim: 0.65;          /* oscurecido del radial (0 = nada, 1 = muy oscuro) */
+// }
+
+// .bg-carpincho::part(background) {
+//   background:
+//     radial-gradient(transparent 40%, rgba(0,0,0,var(--bg-dim)) 100%),
+//     url('/assets/carpincho.png') center / var(--logo-size) no-repeat,
+//     #121212;
+// }
+
+// /* Modificadores opcionales (por si querés variar por página) */
+// .bg-carpincho--bigger  { --logo-size: 180vmax; }
+// .bg-carpincho--smaller { --logo-size: 120vmax; }
+// .bg-carpincho--lighter { --bg-dim: 0.35; }
+// .bg-carpincho--darker  { --bg-dim: 0.8; }
+
+
+
+
+// /* =========== Toast de logout centrado (GLOBAL) =========== */
+// ion-toast.logout-toast {
+//   --background: rgba(18,18,18,1);
+//   --color: #fff;
+//   --border-radius: 12px;
+//   --box-shadow: 0 12px 48px rgba(0,0,0,.45);
+//   text-align: center;
+// }
+
+// /* Caja */
+// ion-toast.logout-toast::part(container) {
+//   width: min(92vw, 300px);
+//   padding: 14px 16px;
+//   border-radius: 12px;
+//   // border: 1px solid rgba(255,255,255,.08);
+//   backdrop-filter: blur(6px) saturate(120%);
+// }
+
+// /* Mensaje */
+// ion-toast.logout-toast::part(message) {
+//   font-size: .95rem;
+//   line-height: 1.35;
+//   margin: 2px 0 10px;
+// }
+
+// /* Botones base */
+// ion-toast.logout-toast::part(button) {
+//   /* 👇 forzamos el color del texto del botón */
+//   --button-color: #ffffff;
+//   color: var(--button-color) !important;
+
+//   font-weight: 700;
+//   padding: 8px 12px;
+//   border-radius: 10px;
+//   background: rgba(255,255,255,.08);
+//   margin-left: 8px;
+// }
+
+// /* CANCELAR (primer botón): outline claro y texto legible */
+// ion-toast.logout-toast::part(button):first-of-type {
+//   --button-color: #e6e6e6;
+//   background: transparent !important;
+//   border: 1px solid rgba(255,255,255,.28);
+//   box-shadow: none;
+// }
+
+// /* SALIR (último botón): violeta sólido */
+// ion-toast.logout-toast::part(button):last-of-type {
+//   --button-color: #fff;
+//   background: #7C3AED !important;
+//   border: 1px solid #7C3AED;
+// }
+
+
+
+
+
+// // ========================================================================//
+// // ========================================================================//
+// // ========================================================================//
+// // ========================================================================//
+
+
 /*
  * App Global CSS
  * ----------------------------------------------------------------------------
@@ -32,18 +163,15 @@
  * https://ionicframework.com/docs/theming/dark-mode
  */
 
-/* @import "@ionic/angular/css/palettes/dark.always.css"; */
-/* @import "@ionic/angular/css/palettes/dark.class.css"; */
-@import "@ionic/angular/css/palettes/dark.system.css";
+/* ⚡ Forzamos dark mode SIEMPRE */
+@import "@ionic/angular/css/palettes/dark.always.css";
 
-
-// ========================================================================//
-// ========================================================================//
-/* ===========================
-   Fondo global: Carpincho
-   Uso: <ion-content class="bg-carpincho">
-   Ajustes rápidos: agregá modifiers opcionales debajo
-   =========================== */
+/* ======================================================================== */
+/* ============================ Fondo global =============================== */
+/* ======================================================================== */
+/* Uso: <ion-content class="bg-carpincho"> 
+   Modificadores: bg-carpincho--bigger / smaller / lighter / darker
+*/
 .bg-carpincho {
   --background: #121212;   /* base dark */
   --logo-size: 140vmax;    /* tamaño del logo (120–180vmax según gusto) */
@@ -63,11 +191,9 @@
 .bg-carpincho--lighter { --bg-dim: 0.35; }
 .bg-carpincho--darker  { --bg-dim: 0.8; }
 
-
-
-
-
-/* =========== Toast de logout centrado (GLOBAL) =========== */
+/* ======================================================================== */
+/* ============================ Toast logout =============================== */
+/* ======================================================================== */
 ion-toast.logout-toast {
   --background: rgba(18,18,18,1);
   --color: #fff;
@@ -81,7 +207,6 @@ ion-toast.logout-toast::part(container) {
   width: min(92vw, 300px);
   padding: 14px 16px;
   border-radius: 12px;
-  // border: 1px solid rgba(255,255,255,.08);
   backdrop-filter: blur(6px) saturate(120%);
 }
 
@@ -94,7 +219,6 @@ ion-toast.logout-toast::part(message) {
 
 /* Botones base */
 ion-toast.logout-toast::part(button) {
-  /* 👇 forzamos el color del texto del botón */
   --button-color: #ffffff;
   color: var(--button-color) !important;
 
@@ -118,4 +242,52 @@ ion-toast.logout-toast::part(button):last-of-type {
   --button-color: #fff;
   background: #7C3AED !important;
   border: 1px solid #7C3AED;
+}
+
+
+/* === Forzar dark global y superficies oscuras === */
+:root {
+  color-scheme: dark;
+
+  /* Fondo y texto base */
+  --ion-background-color: #000000;
+  --ion-background-color-rgb: 0,0,0;
+  --ion-text-color: #ffffff;
+  --ion-text-color-rgb: 255,255,255;
+
+  /* Superficies */
+  --ion-card-background: #1b1b1b;
+  --ion-item-background: #1b1b1b;
+  --ion-toolbar-background: #000000;
+  --ion-tab-bar-background: #111111;
+
+  /* Primario (ajustá a gusto) */
+  --ion-color-primary: #3b82f6;
+  --ion-color-primary-contrast: #ffffff;
+}
+
+/* Aplicar variables a los componentes clave */
+ion-content { --background: var(--ion-background-color); }
+
+ion-card,
+ion-item,
+ion-list,
+ion-input,
+ion-textarea,
+ion-select {
+  --background: var(--ion-card-background);
+  color: var(--ion-text-color);
+}
+
+ion-toolbar {
+  --background: var(--ion-toolbar-background);
+  --color: var(--ion-text-color);
+}
+
+ion-title, ion-label, ion-text { color: var(--ion-text-color); }
+
+ion-tab-bar {
+  --background: var(--ion-tab-bar-background);
+  --color: var(--ion-text-color);
+  --color-selected: var(--ion-color-primary);
 }
